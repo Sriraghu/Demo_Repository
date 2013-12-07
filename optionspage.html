@@ -1,0 +1,201 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Mobile Home</title> 	
+    <link href="css/jquery.mobile.css" rel="stylesheet" />
+    <link href="css/jquery.toastmessage.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mobile.js"></script>
+    <script src="js/viewThemeforOptions.js"></script>
+    <script src="js/jquery.toastmessage.js"></script>
+     <script type="text/javascript" >
+         $(document).delegate('[data-role="page"]', 'pagecreate', function (e) {
+             setTheme();
+             checkMMID();   
+         });
+    </script> 
+</head> 
+
+
+<body onload="viewTheme()"> 
+
+<div data-role="page" data-theme="b" >
+   
+
+  <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#" data-corners="false"   data-iconpos="notext" class="ui-btn-right" data-icon="gear" id="logout"   data-mini="true" data-inline="true"  data-role="button" data-theme="">Logout</a>
+	                 <h1 style="font-size:14px">Options</h1>
+                <a href="#" class="ui-btn-left"   data-iconpos="notext" data-corners="false"  data-icon="home" id="home"  data-mini="true" data-inline="true"  data-role="button" data-theme="">Home</a>
+            </div>
+	<div data-role="content">	
+<!--Content start-->
+        <div   style="text-align:center">
+	         <input type="button" data-mini="true" data-corners="false"  value="Balance Enquiry"   id="current_balance" name="Balance Enquiry" data-theme="e" onclick="DisplayCurrentBalance()"><br/>   
+			</div>
+         <div   style="text-align:center">
+	         <input type="button" data-mini="true" data-corners="false"  value="Mini Statement"   id="mini_statement" name="Mini Statement" data-theme="e" onclick="DisplayMiniStatement()"><br/>   
+
+			</div>
+         <div  style="text-align:center">
+	         <input type="button" data-mini="true" data-corners="false"  value="Funds Transfer"   id="fund_transfer" name="Funds Transfer" data-theme="e" ><br/>   
+			</div>
+        <div  style="text-align:center;">
+	         <input type="button" data-mini="true" data-corners="false"  value="Generate MPIN"   id="generate_mpin" name="Generate MPIN" data-theme="e" ><br/>   
+	    </div>
+
+         <div  style="text-align:center;">
+	         <input type="button" data-mini="true" data-corners="false"  value="Reset MPIN"   id="reset_mpin" name="Reset MPIN" data-theme="e" ><br/>   
+	    </div>
+        <div   id="divbtngenMMID" style="text-align:center;">
+	         <input type="button" data-mini="true" data-corners="false"  value="Generate MMID"   id="btn_generate_mmid" name="Generate MMID" data-theme="e" ><br/>   
+			</div>
+          <div  id="div1" style="text-align:center;">
+	         <input type="button" data-mini="true" data-corners="false"  value="Retrieve MMID"  data-position-to="window"  data-rel="popup"  id="btn_retrieve-mmid" name="Retrieve MMID" data-theme="e" ><br/>   
+			</div>
+<!--Content end-->
+
+<div data-role="popup" id="popupaskMPIN"   aria-disabled="false" style="width:280px;background-color:burlywood" data-inline="true" data-overlay-theme="a"  data-corners="false" data-transition="none" data-position-to="origin">
+			<form  style="padding:10px">
+                  <div class="ui-grid-a" style="text-align:center" >
+		                        <div class="ui-block-a" style="width:70%;padding-top:10px;padding-right:4px"><label for="accountno">Please enter your MPIN<span style="color:red">*</span></label></div>
+                               <div class="ui-block-b" style="width:30%;padding-right:5px"><input type="password" id="txtmpin" value="" maxlength="4" data-inline="true" data-mini="true" data-theme="d"></div>
+                    </div>
+                    <!--<div class="ui-grid-solo"  style="padding-left:5px;padding-right:5px" >   
+                      <input type="text" id="txtmpin" value="" maxlength="4" data-inline="true" data-mini="true" data-theme="d">
+                   </div>-->
+                    <div id="lbldisplayMMID" style="text-align:center;display:none;font-size:14px;color:Red"></div>
+                    <div class="ui-grid-a" align="center">
+                        <div class="ui-block-a"><button type="button" id="btnCancelDialog"   data-theme="a" data-mini="true"  data-corners="false" data-rel="back">Cancel</button>
+                           
+                        </div>
+                        <div class="ui-block-b"><button type="button" id="btnSubmitMPIN"  data-theme="b" data-mini="true" data-corners="false"  >Submit</button></div>
+                    </div>
+               <!-- </div>-->
+		    </form>
+         </div>
+
+
+<div data-role="popup" id="popupgenerate_MPIN"   aria-disabled="false" style="width:280px;background-color:burlywood" data-inline="true" data-overlay-theme="a"  data-corners="false" data-transition="none" data-position-to="origin">
+			<form  style="padding:10px">
+                  <div class="ui-grid-solo" style="text-align:center" >
+		                        <!--<div class="ui-block-a" style="width:70%;padding-top:10px;padding-right:4px">--><label for="accountno">Please enter a 4 digit number to set as your MPIN.</label><!--</div>-->
+                               
+                    </div>
+                    <div class="ui-grid-solo"  style="padding-left:80px;padding-right:80px" >   
+                      <input type="password" id="txtgenerateMPIN" value="" maxlength="4" data-inline="true" data-mini="true" data-theme="d">
+                   </div>
+                   <div id="lblemptyMPIN" style="text-align:center;display:none;font-size:14px;color:Red"></div>
+                    <!--<div id="Div3" style="text-align:center;display:none;font-size:14px;color:black"></div>-->
+                    <div class="ui-grid-a" align="center">
+                        <div class="ui-block-a"><button type="button" id="cancel_generate_mpin"   data-theme="a" data-mini="true"  data-corners="false" data-rel="back">Cancel</button>
+                           
+                        </div>
+                        <div class="ui-block-b"><button type="button" id="submit_generate_mpin"  data-theme="b" data-mini="true" data-corners="false" data-rel="popup" data-position-to="window">Submit</button></div>
+                    </div>
+               <!-- </div>-->
+		    </form>
+         </div>
+
+<!--//Toast POPUP-->
+        <div data-role="popup" id="popuptoast"   aria-disabled="false" style="width:280px;background-color:burlywood" data-inline="true" data-overlay-theme="a"  data-corners="false" data-transition="none" data-position-to="origin">
+		          <!--  <div class='error' style='display:none' data-position-to="origin">Your MPIN is generated Successfully.</div>-->
+            <p>Your MPIN is generated Successfully.<p>
+         </div>
+
+       
+         <div data-role="footer" data-theme="b" data-position="fixed">
+	             <h6 style="font-size:12px">&copy;Processware Systems (P) Ltd</h6>
+           </div>
+</div><!-- /page -->
+   <style>
+        .ui-header .ui-title, .ui-footer .ui-title {
+             margin-right: 0 !important; margin-left: 0 !important;
+         }
+   </style>
+    <script type="text/javascript">
+        var accno = getParameterByName("AccountNumber");
+        $('#fund_transfer').click(function () {
+            document.location = "bankoptions.html?AccountNumber=" + accno + "&userid=" + userid + "";
+        });
+
+        $('#btnCancelDialog').click(function () {
+            window.location = "optionspage.html?AccountNumber=" + accno + "&userid=" + userid + ""
+        });
+
+        $('#btnSubmitMPIN').click(function () {
+            submitMpin();
+        });
+
+        $('#generate_mpin').click(function () {
+
+            $('#popupgenerate_MPIN').popup("open");
+        });
+      
+        $('#submit_generate_mpin').click(function () {
+            userMPIN = $('#txtgenerateMPIN').val();
+            console.log("User MPIN:" + userMPIN);
+            if (userMPIN == null || userMPIN == "" || userMPIN.length < 4 || userMPIN.length > 4)
+            {
+                $('#lblemptyMPIN').html("Please enter 4 digit MPIN.").show();
+            } else {
+                generateMPIN();
+            }
+        });
+
+        $('#cancel_generate_mpin ').click(function () {
+            $('#lblemptyMPIN').hide();
+            window.location = "optionspage.html?AccountNumber=" + accno + "&userid=" + userid + ""
+        });
+
+        $('#reset_mpin').click(function () {
+            $().toastmessage('showToast', {
+                text: 'You clicked Reset MPIN ...',
+                sticky: false,
+                position: 'middle-center',
+                type:'error'
+            });
+        }); 
+
+        $('#txtmpin').focus(function () {
+            $('#lbldisplayMMID').hide();
+        });
+
+        $('#txtgenerateMPIN').focus(function () {
+            $('#lblemptyMPIN').hide();
+        });
+
+        //$("#logout").click(function () {
+        //    var logout = confirm("Do you really want to logout?");
+        //    if (logout == true) {
+        //        document.location = "index.html";
+        //    }
+        //});
+        $("#home").click(function () {
+            document.location = "userdetailspage.html?userid=" + userid + "";
+        });
+        function getParameterByName(name) {
+            var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+            return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+        }
+      
+        function DisplayCurrentBalance() {
+            document.location = "accountbalancepage.html?AccountNumber=" + accno + "&userid=" + userid + "";
+        }
+
+        function DisplayMiniStatement() {
+            console.log('Acccc no:' + accno);
+            document.location = "usertransactionspage.html?AccountNumber=" + accno + "&userid=" + userid + "";
+        }
+
+        $('#btn_retrieve-mmid').click(function () {
+            $('#popupaskMPIN').popup("open");
+        });
+
+        $('#btn_generate_mmid').click(function () {
+            generateMMID();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Mobile Home</title> 	
+     <link href="http://code.jquery.com/mobile/latest/jquery.mobile.css" rel="stylesheet" type="text/css" />
+    <link href="css/jquery.toastmessage.css" rel="stylesheet" />
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile.js"></script>
+    <script src="js/jquery.toastmessage.js"></script>
+    <script type="text/javascript" src="js/jquery.json-2.3.js"></script> 
+    <script type="text/javascript" src="js/jshomepage.js"></script>
+    <script type="text/javascript" src="js/JQuery.Session.js"></script>
+    <script src="js/viewTheme.js"></script>
+    <script type="text/javascript" >
+        function getParameterByName(name) {
+            var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+            return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+        }
+        var userid = "";
+        $(document).delegate('.ui-page', 'pagebeforeshow', function () {
+            setTheme();
+            $("#mypanel").trigger("updatelayout"); 
+        });
+    </script>    
+      <style>
+        .ui-header {
+            margin-right: 0 !important;
+            margin-left: 0 !important;
+        }
+    </style>
+</head> 
+
+
+<body onload="viewTheme()"> 
+
+<div data-role="page" data-theme="b" id="userdetails">
+ <div data-role="panel" id="mypanel" style="" data-position-fixed="true" data-position="right" data-theme="b" data-display="overlay">
+ <!--<div data-role="popup" id="popupPanel" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">-->
+ <!--<ul data-role="listview" data-theme="a">-->
+ <!-- <li data-icon="false">
+    <li data-icon="false"><a href="#my-header" data-rel="close" data-icon="delete"></a></li></li>-->
+  <!--  <li data-icon="logout" data-position="left"><a href="settings.html">Settings</a></li>
+    <li><a href="#resetpassword" data-rel="popup">Reset Password</a></li>
+    <li><a href="emicalculator.html">EMI Calculator</a></li>
+    <li><a href="exchangerates.html">Exchange Rates</a></li>
+    <li><a href="#confirmlogout" data-rel="popup">Logout</a></li>
+      
+</ul>-->
+     <a  data-icon="grid" data-corners="false" data-role="button" data-theme="e" data-mini="true" id="setting">Settings</a>
+     <a href="#resetpassword" data-corners="false" data-rel="popup" data-icon="alert" data-role="button" data-theme="e" data-mini="true" >Reset Password</a>
+     <a href="#" data-icon="info" data-corners="false" data-role="button" data-theme="e" data-mini="true" id="emicalculator">EMI Calculator</a>
+     <a href="#" data-icon="star" data-corners="false" data-role="button" data-theme="e" data-mini="true" id="exchangerates">Exchange Rates</a>
+     <a href="#confirmlogout"  data-corners="false" data-rel="popup" data-icon="gear" data-role="button" data-theme="e" data-mini="true" >Logout</a>
+
+</div>
+
+	<div data-role="header" data-position="fixed" data-theme="b" id="bsimg">
+				    
+        <a href="#mypanel" data-role="button" class="ui-btn-right" data-corners="false"  data-icon="bars" data-iconpos="notext"  data-rel="popup" style="margin-top:5px;">Menu</a>
+	                 <h6 class="ui-header" id="lblBankName" style="font-weight:bold;font-size:small;"></h6>
+			</div><br /><!-- /header -->
+   <!-- <table style="width:100%">
+
+        <tr><th style="text-align:center">Customer name</th></tr>
+        <tr><td style="text-align:center"> <label for="customername" id='txtcustname' data-mini='true'> </label> <td></tr>
+         <tr><th style="text-align:center">Customer code</th></tr>
+        <tr><td style="text-align:center"> <label for="customercode" id='txtcustcode' data-mini='true'> </label> <td></tr>
+
+    </table>-->
+    <div style="text-align:center;padding:0px;border: 2px #ddd solid">
+    <div class="ui-grid-a" style="width:100%">
+        <div class="ui-block-a" style="width:40%;font-weight:bold"><label>Customer name</label></div>    
+        <div class="ui-block-b" style="font-size:14px;width:60%"><label for="customername" id='txtcustname' data-mini='true'> </label> </div>
+    </div>
+    <div class="ui-grid-a" style="width:100%">
+         <div class="ui-block-a" style="width:40%;font-weight:bold">Customer code</div>
+        <div class="ui-block-b" style="font-size:14px;width:60%"><label for="customercode" id='txtcustcode' data-mini='true'> </label> </div>
+    </div>
+</div>
+     
+			  <div id="schemelist" data-role="collapsible-set" data-inline="true" >
+			  </div>
+<!--       <div class="ui-grid-solo" id="showAccNos" style="display:none;padding:0px;margin:0px">
+             <p style="text-align:center;font-size:12px">Choose an account number to create a MMID for that particular account number.</p>
+            <select id="ddlaccnos" data-corners="false" data-mini="true"></select>
+      </div>-->
+<div data-role="footer" data-theme="b" data-position="fixed">
+		<h6 style="font-size:12px">&copy;Processware Systems (P) Ltd</h6>
+	</div><!-- /footer -->
+	
+        <div data-role="popup" id="resetpassword" data-overlay-theme="a" data-theme="e" data-dismissible="false" 
+            style="max-width:300px;" class="ui-corner-all"> <a href="#" data-rel="back"
+            data-role="button" data-theme="a" data-icon="delete" 
+            data-iconpos="notext" class="ui-btn-left">Close</a>
+
+            <div data-role="header"  data-theme="e">
+                <h3 class="ui-header">Reset Password</h3>
+            </div>
+            <div data-role="content"  class="ui-corner-bottom ui-content">
+                <p style="text-align:center">Please contact your home branch to reset your password.</p>
+                <a href="userdetailspage.html" data-mini="true" data-corners="false" data-role="button" data-theme="a"  data-rel="back">Ok</a>
+            </div>
+        </div>
+      <div data-role="popup" id="confirmlogout" data-overlay-theme="a" data-theme="e" data-dismissible="false" 
+            style="max-width:300px;" class="ui-corner-all" data-corners="false" data-mini="true">
+     <!--        <a href="#" data-rel="back"
+            data-role="button" data-theme="a" data-icon="delete" 
+            data-iconpos="notext" class="ui-btn-left">Close</a>-->
+         <!--  // class="ui-header ui-bar-c"-->
+            <div data-role="header"  data-theme="e">
+                <h3 class="ui-header">Confirmation</h3>
+            </div>
+    
+              <div data-role="content" data-theme="e" class="ui-corner-bottom ui-content ui-body-d" role="main">
+			  <h3 class="ui-title" style="text-align:center">Are you sure to logout?</h3>
+              <div class="ui-grid-a">
+              <div class="ui-block-a"><a href="index.html" data-role="button" data-mini="true"  data-theme="b" data-corners="false" data-shadow="true" data-iconshadow="true">Yes</a></div>    
+			  <div class="ui-block-b"><a href="#" data-role="button"  data-mini="true"  data-rel="back" data-transition="flow" data-theme="c" data-corners="false" data-shadow="true" data-iconshadow="true">No</a></div>    
+              </div>
+            </div>
+        </div>
+</div>
+    <script>
+        $("#popupPanel").on({
+            popupbeforeposition: function () {
+                var h = $(window).height();
+                $("#popupPanel").css("height", h);
+            }
+        });
+
+        $('#setting').on("click", function () {
+            userid = getParameterByName("userid");
+            document.location = "settings.html?userid="+userid+"";
+        });
+
+        $('#exchangerates').on("click", function () {
+            userid = getParameterByName("userid");
+            document.location = "exchangerates.html?userid=" + userid + "";  
+        });
+
+        $('#emicalculator').on("click", function () {
+            userid = getParameterByName("userid");
+            document.location = "emicalculator.html?userid=" + userid + "";
+        });
+      
+    </script>
+</body>
+</html>

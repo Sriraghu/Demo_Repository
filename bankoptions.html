@@ -1,0 +1,92 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mobile Home</title>
+    <link href="css/jquery.mobile.css" rel="stylesheet" />
+    <link href="css/jquery.toastmessage.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mobile.js"></script>
+    <script src="js/jquery.toastmessage.js"></script>
+    <script src="js/viewTheme.js"></script>
+    <script type="text/javascript">
+        $(document).delegate('[data-role="page"]', 'pagecreate', function (e) {
+            setTheme();
+        });
+    </script>
+</head>
+
+
+<body>
+
+    <div data-role="page" data-theme="b">
+
+        <div data-role="header" data-position="fixed" data-theme="b">
+            <a href="#" class="ui-btn-right" data-icon="gear"  data-iconpos="notext" data-corners="false" id="logout"  data-mini="true" data-inline="true" data-role="button" data-theme="">Logout</a>
+            <h1 style="font-size:14px">Funds Transfer</h1>
+            <a href="#" class="ui-btn-left"  data-iconpos="notext" data-icon="back" data-corners="false" id="back"  data-mini="true" data-inline="true" data-role="button" data-theme="">Back</a>
+        </div>
+
+
+        <div data-role="content">
+            <!--Content start-->
+            <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br" style="text-align: center">
+                <input type="button" value="Same Bank" data-mini="true" data-corners="false" id="same_bank" name="Same Bank" data-theme="e" onclick="DisplaySameBank()"><br />
+            </div>
+            <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br" style="text-align: center">
+                <input type="button" value="Other Bank" data-mini="true" data-corners="false"  id="other_bank" name="Other Bank" data-theme="e" onclick="DisplayOtherBank()"><br />
+
+            </div>
+
+            <!--Content end-->
+
+        </div>
+        <!-- /page -->
+        <div data-role="footer" data-theme="b" data-position="fixed">
+           <h6 style="font-size:12px">&copy;Processware Systems (P) Ltd</h6>
+        </div>
+    </div>
+
+    <style>
+        .ui-header .ui-title, .ui-footer .ui-title {
+            margin-right: 0 !important;
+            margin-left: 0 !important;
+        }
+    </style>
+    <script type="text/javascript">
+        function getParameterByName(name) {
+            var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+            return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+        }
+        function DisplaySameBank() {
+            userid = getParameterByName("userid");
+            var  accno = getParameterByName("AccountNumber");
+            document.location = "samebankdetails.html?AccountNumber=" + accno + "&userid=" + userid + "";
+        }
+
+        function DisplayOtherBank() {
+            userid = getParameterByName("userid");
+            var accno = getParameterByName("AccountNumber");
+            document.location = "otherbankdetails.html?AccountNumber="+accno+"&userid=" + userid + "";
+        }
+
+        $("#logout").click(function () {
+            var logout = confirm("Do you really want to logout?");
+
+            if (logout == true) {
+                document.location = "index.html";
+            }
+        });
+        $("#back").click(function () {
+            userid = getParameterByName("userid");
+            var accno = getParameterByName("AccountNumber");
+            document.location = "optionspage.html?AccountNumber=" + accno + "&userid=" + userid + "";
+
+        });
+
+
+    </script>
+
+</body>
+</html>

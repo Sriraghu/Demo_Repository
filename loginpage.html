@@ -1,0 +1,131 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Mobile Home</title> 	
+    <link href="css/jquery.mobile.css" rel="stylesheet" />
+    <link href="css/jquery.toastmessage.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+ <!--   <script src="js/cordova.js"></script>-->
+    <script src="js/jquery.mobile.js"></script>
+    <script src="js/jquery.toastmessage.js"></script>
+    <script>
+   
+        $(document).ready(function () {
+            //document.addEventListener("deviceready", onDeviceReady, false);
+
+            $('#login').click(function () {
+               
+                DisplayMessageCall();
+            });
+        });
+        $('#login').click(function () {
+            DisplayMessageCall();
+        });
+
+               var userid;
+               function DisplayMessageCall() {
+                   $.mobile.showPageLoadingMsg();    
+                   userid = $("#txtuid").val();
+                   var pwd = $("#txtpwd").val();
+                    //var pageUrl = 'http://180.92.173.235/BSMobileWS/service1.asmx';
+                    var pageUrl = 'http://localhost/BankSoftWS/service1.asmx';
+                   //var pageUrl = 'http://192.168.1.49/BankSoftWS/service1.asmx';
+                   var Paramsdata = "{'username':'" + userid + "','password':'" + pwd + "'}";
+                   $.ajax(
+                     {
+                         type: "POST",
+                         url: pageUrl + "/ServiceAuth", 
+                         data: Paramsdata,
+                         contentType: "application/json; charset=utf-8",
+                         dataType: "json",
+                         success: OnSuccessCall,
+                         error: OnErrorCall
+                     });
+               }
+
+               function OnSuccessCall(response) {
+                   $.mobile.hidePageLoadingMsg();
+                   //$('#login').button('disable');
+                   if (response.d == true) {
+                       document.location = "userdetailspage.html?userid="+ userid +"";
+                   } else {
+                       $().toastmessage('showToast', {
+                           text: 'Invalid Login Details.',
+                           sticky: false,
+                           position: 'middle-center',
+                           type: 'error'
+                       });
+                   }
+               }
+               function OnErrorCall(response) {
+                   $.mobile.hidePageLoadingMsg();
+                   $().toastmessage('showToast', {
+                       text: ' Network Error.',
+                       sticky: false,
+                       position: 'middle-center',
+                       type: 'error'
+                   });
+               }
+
+               //$("#txtuid").focus(function () {
+               //    $('#login').button('enable');
+               //});
+
+               //$("#txtpwd").focus(function () {
+               //    $('#login').button('enable');
+               //});
+        </script>
+</head> 
+<body> 
+
+<div data-role="page" data-theme="b">
+	<div data-role="header" data-position="fixed" data-theme="b" id="bsimg">
+        <table style="width:100%;text-align:center;padding:0px;margin:0px">
+            <tr><td style="padding:0px;margin:0px"><img src="images/banksoft_logo.png" data-mini="true"  class="ui-li-icon" height="18px" style="padding-top:3px" /></td></tr>
+            <tr><td style="font-size:12px;padding:0px;margin:0px">User Login</td></tr>
+        </table>
+               <!--  <div class="ui-grid-solo">
+                     </div>-->
+			</div><br />
+    <!-- /header -->
+	<div data-role="content" >
+        	
+        <div class="ui-grid-solo" style="padding-left:6px;padding-right:5px;margin-bottom:0px;padding-bottom:0px">
+            <input type="text" placeholder="Username" data-mini="true"  value=""  id="txtuid" name="txtuid"  ">
+        </div>
+        <div class="ui-grid-solo" style="padding-left:6px;padding-right:5px;margin-top:0px;padding-top:0px">
+            <input type="password" data-mini="true"  placeholder="Password"  value="" id="txtpwd" name="txtpwd" >
+        </div>
+           
+        <div class="ui-grid-a">
+            <div class="ui-block-a"> <a href="#" data-corners="false" data-role="button" data-theme="d" data-mini="true" id="A1" style="" >Cancel</a> </div>
+            <div class="ui-block-b"> <input type="submit" data-corners="false" data-mini="true" value="Login" id="login" /></div>
+        </div>
+   <!--     <div style="border: 2px #ddd solid;border-radius: 10px;width: 100%; padding: 20px;">-->
+           <!--  <input type="text"  value="email" style="border: none;width: 260px;padding: 20px;"/>
+             <input type="password" value="password" style="border: none;width: 260px;padding: 20px;"/>-->
+    <!--  </div>-->
+    <div data-role="footer" data-theme="b" data-position="fixed";>
+		<h6 style="font-size:12px">&copy;Processware Systems (P) Ltd</h6>
+	</div><!-- /footer -->
+	
+        <div data-role="popup" id="resetpassword" data-overlay-theme="a" data-theme="c" data-dismissible="false" 
+            style="max-width:300px;" class="ui-corner-all"> <a href="#" data-rel="back"
+            data-role="button" data-theme="a" data-icon="delete" 
+            data-iconpos="notext" class="ui-btn-right">Close</a>   
+
+            <div data-role="header" class="ui-header ui-bar-c" data-theme="b">
+                <h1>Reset Password</h1>
+            </div>
+            <div data-role="content"  class="ui-corner-bottom ui-content">
+                <p>Please contact your home branch to reset your password.</p>  
+                <a href="#" data-mini="true" data-role="button" data-theme="a" data-rel="back">Ok</a>
+            </div>
+        </div>
+</div>
+ 
+</div>
+</body>
+</html>

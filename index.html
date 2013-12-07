@@ -1,0 +1,40 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>	
+	<meta name="viewport" content="width=device-width,initial-scale=1"> 
+	<title>Welcome to BankSoft Mobile Banking</title> 	
+    <link href="css/jquery.mobile.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mobile.js"></script>
+    <script>
+        $(document).on('pageinit', '#splash', function () {
+            setTimeout(function () {
+                //$.mobile.changePage("loginpage.html", "slide");
+                document.location = "loginpage.html";
+            }, 4000);
+        }); 
+    </script> 
+    <style>
+        .center-content{
+               margin: 0 auto;
+                     }
+    </style>
+</head> 
+<body > 
+<div data-role="page" data-theme="b" id="splash" >
+	<div data-role="content" align="center" class="center-content">  
+        <table style="width:100%;text-align:center;margin:0px;padding:0px">
+         <tr><td><p style="padding-bottom:0px;margin-bottom:0px">Welcome to</p></td></tr>
+         <tr><td><img src="images/banksoft_logo.png";class="ui-li-icon" style="height:25px;width:100px;";/></td></tr>
+         <tr><td><p style="padding-top:0px;margin-top:0px">Mobile Banking 1.0</p></td></tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
+

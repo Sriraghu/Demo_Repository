@@ -1,0 +1,84 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Account Details</title>
+        <link href="css/jquery.mobile.css" rel="stylesheet" />
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.mobile.js"></script>
+        <script src="js/jquery.toastmessage.js"></script>
+        <link href="css/jquery.toastmessage.css" rel="stylesheet" />
+        <script src="js/viewTheme.js"></script>
+        <script type="text/javascript" src="js/jquery.json-2.3.js"></script> 
+		<script type="text/javascript" src="js/jsBsAccountDetails.js"></script>
+           <script type="text/javascript" >
+               $(document).delegate('[data-role="page"]', 'pagecreate', function (e) {
+                   setTheme();
+               });
+    </script> 
+ 
+
+ 	
+	</head>
+	<body onload = "getdata();">
+		<div data-role="page" data-theme="b">
+			
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#confirmlogout"  data-iconpos="notext" class="ui-btn-right" data-rel="popup" data-corners="false" data-icon="gear"   data-mini="true" data-inline="true" data-role="button" data-theme="">Logout</a>
+	                 <h1 style="font-size:14px" id="txtno_of_transactions">Mini Statement</h1>
+                <a href="#" class="ui-btn-left"  data-iconpos="notext" data-icon="back" id="back"  data-corners="false" data-mini="true" data-inline="true"  data-role="button" data-theme="">Back</a>
+            </div>
+			<div data-role="content">
+           
+	            <table align="center">
+	            	<tbody id='tblacdetails' data-theme="a">
+	            		
+	            	</tbody>
+	            </table>
+	            <table id='tbltransactions' align="center">
+		            <thead data-role="header" data-theme="b">
+		            	<tr>
+		            		<th style="font-size:smaller;width:30%;font-family:Andalus">Date</th>
+		            		<th style="font-size:smaller;width:40%;font-family:Andalus">Narration</th>
+		            		<th style="font-size:smaller;width:15%;font-family:Andalus">Credit</th>
+		            		<th style="font-size:smaller;width:15%;font-family:Andalus">Debit</th>
+		            	</tr>
+		            </thead>
+		            <tbody data-theme='e' data-role="content" id='tbltrans' style="width:auto">
+		            	
+		            </tbody>
+	            </table>
+        <div data-role="popup" id="confirmlogout" data-overlay-theme="a" data-theme="e" data-dismissible="false" 
+            style="max-width:300px;" class="ui-corner-all">
+             <a href="#" data-rel="back"
+            data-role="button" data-theme="b" data-icon="delete" 
+            data-iconpos="notext" class="ui-btn-left">Close</a>
+         <!--  // class="ui-header ui-bar-c"-->
+            <div data-role="header"  data-theme="e">
+                <h3 class="ui-header">Confirmation</h3>
+            </div>
+    
+                <div data-role="content" data-theme="e" class="ui-corner-bottom ui-content ui-body-d" role="main">
+				<h3 class="ui-title">Are you sure to logout?</h3>
+              <fieldset class="ui-grid-b">
+              <legend></legend>
+              <a href="index.html" data-role="button" data-mini="true" data-inline="true"  data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true">Yes</a>    
+			  <a href="#" data-role="button" data-inline="true" data-mini="true"  data-rel="back" data-transition="flow" data-theme="c" data-corners="true" data-shadow="true" data-iconshadow="true">No</a>  
+              <//fieldset>
+            </div>
+        </div>
+        </div>
+	
+             <div data-role="footer" data-theme="b" data-position="fixed">
+	         <h6 style="font-size:12px">&copy;Processware Systems (P) Ltd</h6>
+             </div>
+		</div>
+	</body>
+    <script>
+        $("#back").click(function () {
+             var accno = getParameterByName("AccountNumber");
+             document.location = "optionspage.html?AccountNumber=" + accno + "&userid=" + userid + "";
+         });   
+   </script>
+    
+</html>

@@ -1,0 +1,63 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Account Balance</title>
+		<link href="css/jquery.mobile.css" rel="stylesheet" />
+        <link href="css/jquery.toastmessage.css" rel="stylesheet" />
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.mobile.js"></script>
+        <script src="js/jquery.toastmessage.js"></script>
+        <script src="js/viewTheme.js"></script>
+        <script type="text/javascript" src="js/jquery.json-2.3.js"></script> 
+        <script src="js/jsBsAccountDetails.js"></script>
+        <script type="text/javascript" src="js/JQuery.Session.js"></script>
+          <script type="text/javascript" >
+              $(document).delegate('[data-role="page"]', 'pagecreate', function (e) {
+                  setTheme();
+              });
+    </script>
+    </head>
+	<body onload="getdata();">
+		<div data-role="page" data-theme="b">
+		    <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#" class="ui-btn-right" data-icon="gear" data-corners="false" id="logout" data-iconpos="notext"   data-mini="true" data-inline="true"  data-role="button" data-theme="">Logout</a>
+	                 <h1 style="font-size:14px">Account Balance</h1>
+                <a href="#" class="ui-btn-left" data-icon="back" data-corners="false" id="back" data-mini="true"  data-iconpos="notext" data-inline="true"  data-role="button" data-theme="">Back</a>
+            </div>
+			
+			<div data-role="content" data-inline="true" id="divcustinfo">
+            <!--      <h4 align="center" style="font-family:Andalus;font-size:20px;background-color:#9FC7E4;">User Details</h4>
+            <hr/>-->
+            <div align="center">
+              <!--<h4><strong><label id="lblBankName" style="font-size:small;background-color:#9FC7E4" ></label></strong></h4>-->
+              <table>
+			     <tbody id='tblacdetails' data-theme="a">
+	            		
+	             </tbody>
+			   </table>
+            </div>
+              
+			</div>
+	             <div data-role="footer" data-theme="b" data-position="fixed">
+	           <h6 style="font-size:12px">&copy;Processware Systems (P) Ltd</h6>
+             </div>
+		</div>
+		<script>
+		    //var accbalance = sessionStorage.getItem('accountbalance');
+		    //console.log('Acccc balance:' + accbalance);
+		    $("#logout").click(function () {
+		        var logout = confirm("Do you really want to logout?");
+
+		        if (logout == true) {
+		            document.location = "index.html";
+		        }
+		    });
+		    $("#back").click(function () {
+		        var accno = getParameterByName("AccountNumber");
+		        document.location = "optionspage.html?AccountNumber=" + accno + "&userid=" + userid + "";
+
+		    });
+		</script>
+	</body>
+</html>

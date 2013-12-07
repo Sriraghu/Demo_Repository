@@ -1,0 +1,344 @@
+﻿<!DOCTYPE HTML>
+<html lang="en" class="ui-mobile">
+<head>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Other bank details</title> 	
+    <link href="css/jquery.mobile.css" rel="stylesheet" />
+    <link href="css/jquery.toastmessage.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mobile.js"></script>
+    <script src="js/jquery.toastmessage.js"></script>
+    <script type="text/javascript" src="js/jquery.json-2.3.js"></script> 
+    <script src="js/viewTheme.js"></script>
+       <script type="text/javascript" >
+           $(document).delegate('[data-role="page"]', 'pagecreate', function (e) {
+               setTheme();
+           });
+    </script> 
+    <script>
+        $(document).ready(function () {
+           
+            $.ajax({
+                type: "GET",
+                url: "themes/banklist.xml",
+                dataType: "xml",
+                success: function (xml) {
+                    var select = $('#select-bank');
+
+                    $(xml).find('dropdown').each(function () {
+                        $(this).find('make').each(function () {
+                            var value = $(this).text();
+                            select.append("<option class='ddindent' value='" + value + "'>" + value + "</option>");
+                        });
+                    });
+                    select.children(":first").text("Select Make").attr("selected", true);
+                } //success close
+            });
+        });
+</script>
+     <style>
+        .ui-header {
+            /*margin-right: 0 !important;
+            margin-left: 0 !important;*/
+             overflow: visible !important;
+             white-space: normal !important;
+        }
+    </style>
+   
+</head> 
+
+<body class="ui-mobile-viewport ui-overlay-c"> 
+<div data-role="page" id="home">
+  <div data-role="header" data-position="fixed" data-theme="b" class="ui-header">
+                <a href="#" class="ui-btn-right"  data-iconpos="notext" data-icon="gear" data-corners="false" id="logout"  data-mini="true" data-theme="" data-inline="true"  data-role="button" data-theme="">Logout</a>
+	                 <h1 style="font-size:14px">Beneficiary Details</h1>
+                <a href="#" class="ui-btn-left"  data-iconpos="notext" data-icon="back" id="back" data-corners="false"   data-mini="true" data-inline="true"  data-role="button" data-theme="">Back</a>
+            </div><!--//class="ui-body ui-body-b"-->
+
+<div  data-role="content" >
+  <form id="ff" method="post">    
+    <!--  <div  data-role="content" ><label for="bankname">Bank name:<span style="color:red;">*</span></label>
+        <select name="select-bank" id="select-bank" data-theme="d" data-corners="false" data-mini="true">
+            <option>Select a bank</option>
+       </select>        
+    </div>-->
+      <div style="padding-left:6px;padding-right:5px">
+      <div class="ui-grid-a" style="width:100%">
+      <!--<div data-role="content" >-->
+          <div class="ui-block-a" style="width:40%;padding-top:8px"><label for="txtmobileno">Mobile number<span style="color:red;">*</span></label></div>
+          <div class="ui-block-b" style="width:60%"> <input id="txtmobileno" type="tel" value="" data-mini="true" maxlength="10"></div>          
+     <!-- </div>-->
+    </div>
+      <!--<div   data-role="content">-->
+        <div class="ui-grid-a" style="width:100%">
+         <div class="ui-block-a" style="width:40%;padding-top:8px"> <label for="txtmmid">MMID<span style="color:red;">*</span></label></div>
+          <div class="ui-block-b" style="width:60%"><input id="txtmmid"  type="number" value="" data-mini="true" maxlength="7"></div>
+        </div>        
+    <!--</div>-->
+    <!--  <div  data-role="content">
+        <label for="customername">Customer name:<span style="color:red;">*</span></label>
+          <input id="txtCustomername" name="pwd_r" type="text" value="" data-mini="true" maxlength="30">          
+    </div> -->     
+      <!--<div data-role="content">-->
+         <div class="ui-grid-a" style="width:100%">
+           <div class="ui-block-a" style="width:40%;padding-top:8px;"><label for="amount">Amount<span style="color:red;">*</span></label></div>
+            <div class="ui-block-b" style="width:60%"><input id="txtamount" name="pwd_r" type="number" data-corners="false" value="" data-mini="true" maxlength="15"></div>
+        </div> 
+          </div>          
+<!--    </div>-->
+
+         <!--<div data-role="content">-->
+     <!--  <div class="ui-grid-a" style="width:100%">
+         <div class="ui-block-a" style="width:40%"> <label for="mpin">MPIN<span style="color:red;">*</span></label></div>
+            <div class="ui-block-b" style="width:60%"><input id="txtmpin" name="pwd_r" type="number" data-corners="false" value="" data-mini="true" maxlength="4"></div>
+      </div> -->         
+    <!--</div>-->
+     <!-- <div data-role="content">-->
+   <!--     <div class="ui-body ui-body-b">-->
+
+            <fieldset class="ui-grid-b" style="width:100%">
+                <legend></legend>
+                <div class="ui-block-a"><button type="button" data-theme="e" data-mini="true" data-corners="false" id="cancelOBD">Cancel</button></div>
+	            <div class="ui-block-b"><button type="button" data-theme="c" data-mini="true" data-corners="false" id="btnReset">Reset</button></div>
+	            <div class="ui-block-c"><a data-role="button" href="#" data-position-to="window"  data-rel="popup" data-theme="b" data-mini="true" data-corners="false" id="btnSubmitOBD">Submit</a></div>	   
+            </fieldset>
+<!--       </div>-->
+
+  <!--  </div> #f7c942 -->
+    </form>
+</div>
+
+<!--    <div class="ui-popup-container ui-selectmenu-hidden" id="popupLogin-popup"> #fadb4e-->
+    <div data-role="popup" id="popupLogin"   aria-disabled="false" style="width:280px;background-color:burlywood" data-inline="true" data-overlay-theme="a"  data-corners="false" data-transition="none" data-position-to="origin">
+			<form  style="padding:10px">
+                  <div class="ui-grid-a" style="text-align:center" >
+		                        <div class="ui-block-a" style="width:70%;padding-top:10px;padding-right:4px"><label for="accountno">Please enter your MPIN<span style="color:red">*</span></label></div>
+                               <div class="ui-block-b" style="width:30%;padding-right:5px"><input type="password" id="txtmpin" value="" maxlength="4" data-inline="true" data-mini="true" data-theme="d"></div>
+                    </div>
+                    <!--<div class="ui-grid-solo"  style="padding-left:5px;padding-right:5px" >   
+                      <input type="text" id="txtmpin" value="" maxlength="4" data-inline="true" data-mini="true" data-theme="d">
+                   </div>-->
+                    <div id="lblErrorMpin" style="text-align:center;display:none;font-size:14px;color:red"></div>
+                    <div class="ui-grid-a" align="center">
+                        <div class="ui-block-a"><button type="button" id="btnCancelDialog"  data-theme="a" data-mini="true"  data-corners="false" data-rel="back">Cancel</button>
+                            <!--<a href="otherbankdetails.html?AccountNumber=" '+ accno + '"&userid=" '+ userid + '" data-role="button" data-corners="false" data-theme="a" data-mini="true">Cancel</a>-->
+                        </div>
+                        <div class="ui-block-b"><button type="button" id="btnSubmitMPIN"  data-theme="b" data-mini="true" data-corners="false"  >Submit</button></div>
+                    </div>
+               <!-- </div>-->
+		    </form>
+         </div>
+ <!--  </div>-->	
+<div data-role="footer" data-theme="b" data-position="fixed">
+	 <h6 style="font-size:12px">&copy;Processware Systems (P) Ltd</h6>
+</div>
+
+</div>
+    <script type="text/javascript">
+        var mobileno, mmid1, amount, mpin;
+        $('#btnSubmitOBD').click (function() {           
+            mobileno = $("#txtmobileno").val();
+            mmid1 = $("#txtmmid").val();
+            amount = $("#txtamount").val();
+            console.log("Amount :" + amount);
+            if (mobileno == 0 || mobileno == null || mobileno == "")
+            {
+                $().toastmessage('showToast', {
+                    text: 'Please enter mobile number.',
+                    sticky: false,
+                    position: 'middle-center',
+                    type: 'warning'
+                });
+            }
+            else if (mobileno.length < 10) {
+                $().toastmessage('showToast', {
+                    text: 'Please enter correct mobile number.',
+                    sticky: false,
+                    position: 'middle-center',
+                    type: 'warning'
+                });
+            }
+            else if (mmid1 == 0 || mmid1 == null || mmid1 == "") {
+                $().toastmessage('showToast', {
+                    text: 'Please enter MMID.',
+                    sticky: false,
+                    position: 'middle-center',
+                    type: 'warning'
+                });
+            }
+            else if (mmid1.length < 7||mmid1.length>7) {
+                $().toastmessage('showToast', {
+                    text: 'Please enter 7 digit MMID.',
+                    sticky: false,
+                    position: 'middle-center',
+                    type: 'warning'
+                });
+            }
+            else if (amount == 0 || amount == null || amount == "") {
+                $().toastmessage('showToast', {
+                    text: 'Please enter Amount.',
+                    sticky: false,
+                    position: 'middle-center',
+                    type: 'warning'
+                });
+            }
+            else {
+                askMPIN();
+            }
+        })       
+        $('#btnReset').click(function() {
+            var mobileno = $("#txtmobileno").val('');
+            var mmid1 = $("#txtmmid").val('');
+            var amount = $("#txtamount").val('');
+        })
+
+        $('#cancelOBD').click(function () {
+            userid = getParameterByName("userid");
+            var accno = getParameterByName("AccountNumber");
+            document.location = "optionspage.html?AccountNumber=" + accno + "&userid=" + userid + "";
+        })
+        //$("#logout").click(function () {
+        //    var logout = confirm("Do you really want to logout?");
+        //    if (logout == true) {
+        //        document.location = "index.html";
+        //    }
+        //});
+        $("#back").click(function () {
+            userid = getParameterByName("userid");
+            var accno = getParameterByName("AccountNumber");
+            document.location = "bankoptions.html?AccountNumber=" + accno + "&userid=" + userid + "";
+        });
+
+        function askMPIN()
+        {
+            $('#popupLogin').popup("open");
+        
+        }
+        var userMPIN = "";
+        $('#btnSubmitMPIN').click(function () {
+                userMPIN = $('#txtmpin').val();
+                submitBeneficiaryDetails();
+        });
+
+        $('#btnCancelDialog').click(function () {
+            userid = getParameterByName("userid");
+            var accno = getParameterByName("AccountNumber");
+            window.location = "optionspage.html?AccountNumber=" + accno + "&userid=" + userid + ""
+            //$('#popupLogin').popup("close");
+        });
+
+        function submitBeneficiaryDetails()
+        {
+
+            $.mobile.showPageLoadingMsg();
+            var cc = sessionStorage.getItem("customercode");
+            console.log("Inside submitIMPSDetails()");
+            //var pageUrl = 'http://180.92.173.235/BSMobileWS/service1.asmx';
+            var pageUrl = 'http://localhost/BankSoftWS/service1.asmx';
+            //var pageUrl = 'http://192.168.1.49/BankSoftWS/service1.asmx';
+            var Paramsdata = "{'customercode':'"+cc+"'}";
+            console.log("Posted Params :" + Paramsdata);
+
+            $.ajax(
+              {
+                  type: "POST",
+                  url: pageUrl + "/getMPIN",
+                  data: Paramsdata,
+                  contentType: "application/json; charset=utf-8",
+                  dataType: "json",
+                  success: OnSuccessCallIMPSDetails,
+                  error: OnErrorCall
+              });
+            console.log("Outside Ajax..!!");
+        }
+
+        function OnSuccessCallIMPSDetails(response)
+        {
+            var getMPIN;
+            getMPIN = response.d
+            console.log("MPIN from database :" + getMPIN);
+            if (userMPIN != getMPIN) {
+                $('#lblErrorMpin').html("Invalid MPIN.");
+                $('#lblErrorMpin').show();
+            }
+            else {
+                $('#lblErrorMpin').hide();
+                //construct a outwardMessage
+                getRemitterDetails();
+            }
+            $.mobile.hidePageLoadingMsg();
+        
+        }
+        $('#txtmpin').focus(function () {
+            $('#lblErrorMpin').hide();
+        });
+        function getRemitterDetails()
+        {
+            $.mobile.showPageLoadingMsg();
+            var cc = sessionStorage.getItem("customercode");
+            var accno = getParameterByName("AccountNumber");
+            console.log("Inside submitIMPSDetails()");
+            //var pageUrl = 'http://180.92.173.235/BSMobileWS/service1.asmx';
+            var pageUrl = 'http://localhost/BankSoftWS/service1.asmx';
+            //var pageUrl = 'http://192.168.1.49/BankSoftWS/service1.asmx';
+            var Paramsdata = "{'accountnumber':'" + accno + "'}";
+            console.log("Posted Params :" + Paramsdata);
+
+            $.ajax(
+              {
+                  type: "POST",
+                  url: pageUrl + "/getRemitterBankDetails",
+                  data: Paramsdata,
+                  contentType: "application/json; charset=utf-8",
+                  dataType: "json",
+                  success: OnSuccessCallRemitterDetails,
+                  error: OnErrorCall
+              });
+        }
+
+        function OnSuccessCallRemitterDetails(response)
+        {
+            console.log(response.d);
+            var res = response.d
+            console.log("Response from server:" + response.d);
+            var accno = getParameterByName("AccountNumber");
+
+            var sendername;
+            var senderaddress;
+            var senderemail;
+            var sendermobileno;
+
+            $.each($.evalJSON(res), function () {
+                sendername = this.accountname;
+                senderaddress = this.address;
+                sendermobileno = this.mobile1;
+                senderemail = this.email;
+            });
+
+            var d = new Date();
+
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+            var hour = d.getHours();
+            var minute = d.getMinutes();
+            var second = d.getSeconds();
+
+            var outputTimeDate = d.getFullYear() + '-' +
+                (('' + month).length < 2 ? '0' : '') + month + '-' +
+                (('' + day).length < 2 ? '0' : '') + day + ' ' +
+                (('' + hour).length < 2 ? '0' : '') + hour + ':' +
+                (('' + minute).length < 2 ? '0' : '') + minute + ':' +
+                (('' + second).length < 2 ? '0' : '') + second;
+
+            var finalString = $.trim(accno) + "#" + outputTimeDate + "#" + amount + "           " + "#" + mobileno + "#" + mmid1 + "#" + sendermobileno + "#" + senderaddress
+                              + "#" + sendername + "#" + senderemail;
+            console.log(finalString);
+            //Insert final String into database.
+        }
+        function OnErrorCall(response) {
+            $.mobile.hidePageLoadingMsg();
+        }
+     </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1"/> 
+	<title>Mobile Home</title> 	
+    <link href="css/jquery.mobile.css" rel="stylesheet" />
+    <link href="css/jquery.toastmessage.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mobile.js"></script>
+    <script type="text/javascript" src="js/jquery.json-2.3.js"></script>
+    <script src="js/viewThemeforOptions.js"></script>
+    <script src="js/jquery.toastmessage.js"></script>
+    <script>
+        $(document).on('pagebeforeshow', '#index', function () {
+            $("#btnCalculateAvg").on("click", function () {
+                $(this).toggleClass("toggleOffButton");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div data-role="content">
+        <div class="ui-grid-b">
+       <div class="ui-block-a"> <input type="text" id="internal1" name="marks" value="" maxlength="4" data-inline="true" data-mini="true" data-theme="d" placeholder="Internal I"/></div>
+       <div class="ui-block-b"> <input type="text" id="internal2"  name="marks" value="" maxlength="4" data-inline="true" data-mini="true" data-theme="d" placeholder="Internal II"/></div>
+       <div class="ui-block-c"><input type="text" id="internal3"  name="marks" value="" maxlength="4" data-inline="true" data-mini="true" data-theme="d" placeholder="Internal III"/></div>
+       </div>
+        <input type="button"   id="btnCalculateAvg" data-theme="e" value="Calculate" data-mini="true" data-corners="false"/>
+
+    </div>
+
+</body>
+    <script>
+        $('#btnCalculateAvg').click(function () {
+
+            var internalMarks1,internalMarks2,internalMarks3;
+            var internalAverage;
+            internalMarks1 = $('#internal1').val();
+            internalMarks2 = $('#internal2').val();
+            internalMarks3 = $('#internal3').val();
+            var marks1 = parseInt(internalMarks1);
+            var marks2 = parseInt(internalMarks2);
+            var marks3 = parseInt(internalMarks3);
+            var arrInternalMarks = [];
+            arrInternalMarks.push(marks1);
+            arrInternalMarks.push(marks2);
+            arrInternalMarks.push(marks3);
+
+            arrInternalMarks = arrInternalMarks.sort(function (a, b) {
+                return b-a;
+            });
+            internalAverage = (arrInternalMarks[0]+arrInternalMarks[1])/2;
+            $().toastmessage('showToast', {
+                text: "Internal Average is : " + internalAverage,
+                sticky: true,  
+                position: 'middle-center',
+                type: 'notice'
+            });
+        });
+        
+    </script>
+</html>

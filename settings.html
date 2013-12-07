@@ -1,0 +1,138 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+<head>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Mobile Home</title>
+    <link href="css/jquery.mobile.css" rel="stylesheet" />
+        <link href="css/jquery.toastmessage.css" rel="stylesheet" />
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.mobile.js"></script>
+        <script src="js/jquery.toastmessage.js"></script>
+        <script src="js/Copy of viewTheme.js"></script>
+        <script type="text/javascript" src="js/jquery.json-2.3.js"></script>
+        <script type="text/javascript">
+            var userid = "";
+            $(document).delegate('[data-role="page"]', 'pagecreate', function (e) {
+                setTheme();   
+            });
+    </script>
+    <style>
+        .ui-header {
+            margin-right: 0 !important;
+            margin-left: 0 !important;
+        }
+    </style>
+</head>
+
+
+<body onload="viewTheme()"> 
+
+    <div data-role="page" data-theme="b" id="settings">
+
+        <div data-role="header" data-position="fixed" data-theme="b">
+            <!-- <a href="#" class="ui-btn-right" data-icon="gear" id="logout"  data-iconpos="notext" data-mini="true" data-inline="true" id="A1" data-role="button" data-theme="">Logout</a>-->
+            <h1 style="font-size:14px">Settings</h1>
+            <button class="ui-btn-left"  data-iconpos="notext" data-icon="back" id="back"  data-corners="false" data-mini="true" data-inline="true"  data-role="button">Back</button>
+        </div>
+
+
+        <div data-role="content" >
+            
+                <fieldset data-role="controlgroup" data-corners="false" data-mini="true">
+        <legend>Choose a theme:</legend>
+           	<input type="radio" name="radio-choice-2" id="radio-choice-21" value="choice-1" data-theme="a" />
+         	<label for="radio-choice-21" >Black</label>
+
+         	<input type="radio" name="radio-choice-2" id="radio-choice-22" value="choice-2" data-theme="b"/>
+         	<label for="radio-choice-22" >Blue</label>
+
+         	<input type="radio" name="radio-choice-2" id="radio-choice-23" value="choice-3" data-theme="c"/>
+         	<label for="radio-choice-23" >White</label>
+
+         	<input type="radio" name="radio-choice-2" id="radio-choice-24" value="choice-4" data-theme="e"/>
+         	<label for="radio-choice-24" >Yellow</label>
+      </fieldset> 
+                <fieldset data-role="controlgroup" data-corners="false" data-mini="true">
+        <legend>Choose number of entries in Mini-Statement:</legend>
+        <input type="radio" name="radio-choice" id="radio-choice-1" value="choice-1"/>
+        <label for="radio-choice-1">5</label>
+ 
+        <input type="radio" name="radio-choice" id="radio-choice-2" value="choice-2"/>
+        <label for="radio-choice-2">10</label>
+      </fieldset> 
+                <fieldset data-role="controlgroup" data-mini="true">
+                    <legend></legend>
+                    <label for="flip-c">Funds Transfer:</label>
+                    <select name="slider" id="flip-c" data-role="slider"  data-mini="true" >
+                        <option  value="on">On</option>
+                        <option  value="off">Off</option>
+                    </select>
+                </fieldset>
+            </div>
+     </div>
+    
+    <script>
+        var theme = "";
+        var no_of_entries_ministmt = "";
+        $('#radio-choice-21').on("click", function () {
+            theme = "a";
+            updateTheme(theme);
+        });
+        $('#radio-choice-22').on("click", function () {
+            theme = "b";
+            updateTheme(theme);
+        });
+        $('#radio-choice-23').on("click", function () {
+            theme = "c";
+            updateTheme(theme);
+        });
+        $('#radio-choice-24').on("click", function () {
+            theme = "e";
+            updateTheme(theme);
+        });
+
+        $('#radio-choice-1').on("click", function () {
+            no_of_entries_ministmt = "5";
+            updateMinistatment(no_of_entries_ministmt);
+        });
+
+        $('#radio-choice-2').on("click", function () {
+            no_of_entries_ministmt = "10";
+            updateMinistatment(no_of_entries_ministmt);
+        });
+        var val = 'on';
+        $('select#flip-c').change(function () {
+            if (val !== $(this).val()) {
+                var flip_state = $(this).val();
+                console.log("Flip State INN:" + flip_state);
+                updateFundsTransfer(flip_state);
+            }
+            val = $(this).val();
+            console.log("Flip State VAL:" + val);
+            updateFundsTransfer(val);
+            if (val == "off") {
+                $().toastmessage('showToast', {
+                    text: 'You have disabled Funds Transfer.',
+                    sticky: false,
+                    position: 'middle-center',
+                    type: 'notice'
+                });
+            }
+            else if (val == "on") {
+                $().toastmessage('showToast', {
+                    text: 'You have enabled Funds Transfer.',
+                    sticky: false,
+                    position: 'middle-center',
+                    type: 'notice'
+                });
+            }
+        });
+
+        $('#back').on("click", function () {
+            userid = getParameterByName("userid");
+            document.location = "userdetailspage.html?userid=" + userid + "";
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Mobile Home</title> 	
+    <link href="css/jquery.mobile.css" rel="stylesheet" />
+    <link href="css/jquery.toastmessage.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mobile.js"></script>  
+    <script src="js/jquery.toastmessage.js"></script>
+    <script src="js/viewTheme.js"></script>
+    <script type="text/javascript">
+
+        $(document).delegate('[data-role="page"]', 'pagecreate', function (e) {
+            setTheme();
+        });
+
+        $(function () {
+            $('#btnCalculate').click(function () {
+                var amount = $('#amount').val();
+                var duration = $('#duration').val();
+                var interest = $('#rateofinterest').val();
+                var tenure = duration * 12;
+                var emi = 0;
+
+                var exp = Math.pow((1 + interest/1200), tenure);
+
+                if (amount == null || amount == "" ||amount==0)
+                {
+                    $().toastmessage('showToast', {
+                        text: 'Please enter amount.',
+                        sticky: false,
+                        position: 'middle-center',
+                        type: 'warning'
+                    });
+                }
+               else if (duration == null || duration == ""||duration == 0)
+                {
+                   $().toastmessage('showToast', {
+                       text: 'Please enter duration.',
+                       sticky: false,
+                       position: 'middle-center',
+                       type: 'warning'
+                   });
+                }
+               else if (interest == null || interest == ""||interest==0) {
+                   $().toastmessage('showToast', {
+                       text: 'Please enter rate of interest.',
+                       sticky: false,
+                       position: 'middle-center',
+                       type: 'warning'
+                   });
+                }
+                else {
+                    emi = (amount * interest / 1200 * exp) / (exp - 1);
+                    var finalEmi = Math.round(emi);
+                    $('#emidisplay').html("EMI calculated is Rs." + finalEmi);
+               }
+            });
+
+            $('#btnReset').click(function () {
+                var amount = $('#amount').val('');
+                var duration = $('#duration').val('1');
+                var interest = $('#rateofinterest').val('1');
+                $('#emidisplay').html('');
+            });
+            $('#btnback').click(function () {
+                 document.location = "userdetailspage.html?userid="+userid+"";
+            });
+        });
+
+        function btnOk() {
+            document.location = "emicalculator.html?userid=" + userid + "";
+        }
+</script>
+   
+</head> 
+
+
+<body> 
+
+<div data-role="page" data-theme="b">
+<!--    <div data-role="panel" id="mypanel" style="position:fixed;" data-position-fixed="true" data-position="right" data-theme="b" data-display="overlay">
+ <ul data-role="listview" data-theme="d">
+ <!-- <li data-icon="false">
+    <li data-icon="false"><a href="#my-header" data-rel="close" data-icon="delete"></a></li></li>-->
+<!--    <li data-icon="gear" data-position="left"><a>Settings</a></li>
+    <li><a href="#resetpassword" data-rel="popup">Reset Password</a></li>
+    <li>EMI Calculator</li>
+    <li>Exchange Rates</li>
+    <li><a href="index.html">Logout</a></li>
+</ul>-->
+
+<!--</div>-->
+
+	 <div data-role="header" data-position="fixed" data-theme="b">
+               <!-- <a href="#" class="ui-btn-right" data-icon="gear" id="logout"  data-iconpos="notext" data-mini="true" data-inline="true" id="A1" data-role="button" data-theme="">Logout</a>-->
+	                 <h1 style="font-size:14px">EMI Calculator</h1>
+                <a  class="ui-btn-left" data-icon="back" id="btnback"  data-iconpos="notext" data-rel="back" data-corners="false" data-mini="true" data-inline="true"  data-role="button" data-theme="">Back</a>
+            </div>
+
+	
+	<div data-role="content"  >	
+       <form id="form1" runat="server">
+      
+         <!--<div   data-role="content">-->
+         <div style="padding-left:6px;padding-right:5px">
+          <div class="ui-grid-a">
+             <div class="ui-block-a"><label for="amount">Amount(in Rs):<span style="color:red;">*</span></label></div>
+             <div class="ui-block-b"> <input id="amount" name="pwd_r" type="number" data-mini="true" maxlength="12" value=""></div>
+          </div>              
+   <!--     </div>-->
+
+           
+        <!-- <div   data-role="content">-->
+           <div class="ui-grid-a">
+          <div class="ui-block-a"> <label for="amount">Duration(in Years):<span style="color:red;">*</span></label></div>
+          <div class="ui-block-b"><input id="duration" name="pwd_r" type="number" data-mini="true" maxlength="4" value="1"></div>
+           </div>            
+      <!--  </div>-->
+
+           
+        <!-- <div   data-role="content">-->
+          <div class="ui-grid-a"> 
+         <div class="ui-block-a"> <label for="amount">Rate of Interest(%):<span style="color:red;">*</span></label></div>
+         <div class="ui-block-b"> <input id="rateofinterest" name="pwd_r" type="number" data-mini="true" maxlength="3" value="1"></div> 
+          </div>  
+         </div>           
+<!--        </div>-->
+      </form>
+                    <div id="emidisplay"  style="padding: 2px;font-weight:normal;text-align:center; font-size:16px">
+      </div>
+        <div  class="ui-grid-a">
+      
+	            <div class="ui-block-a"><button id="btnReset" data-corners="false" type="submit" data-theme="c" data-mini="true" >Reset</button></div>
+	            <div class="ui-block-b"><button id="btnCalculate" data-corners="false" type="submit" data-theme="b" data-mini="true">Calculate</button></div>	   
+        </div>
+     <!--          <div id="emidisplay" style="padding: 2px; margin: 5px; font-weight:normal;text-align:center; font-size:16px">
+      </div>-->
+        <div data-role="footer" data-theme="b" data-position="fixed">
+		<h6 style="font-size:12px">&copy;Processware Systems (P) Ltd</h6>
+	</div><!-- /footer -->
+   </div>   	
+    </div>	
+</body>
+</html>
